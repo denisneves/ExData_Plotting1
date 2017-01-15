@@ -1,0 +1,8 @@
+data_household <- read.csv("C:/Users/dneves/Desktop/data_household.txt", sep=";")
+data_household <- data.frame(Date = as.Date(data_household$Date, format = '%d/%m/%Y'), Time = data_household$Time, Global_active_power = data_household$Global_active_power, Global_reactive_power = data_household$Global_reactive_power, Voltage = data_household$Voltage, Global_intensity = data_household$Global_intensity, Sub_metering_1 = data_household$Sub_metering_1, Sub_metering_2 = data_household$Sub_metering_2, Sub_metering_3 = data_household$Sub_metering_3)
+data_household <- data.frame(Datetime = paste(data_household$Date, data_household$Time, sep = ":"), Global_active_power = data_household$Global_active_power, Global_reactive_power = data_household$Global_reactive_power, Voltage = data_household$Voltage, Global_intensity = data_household$Global_intensity, Sub_metering_1 = data_household$Sub_metering_1, Sub_metering_2 = data_household$Sub_metering_2, Sub_metering_3 = data_household$Sub_metering_3)
+data_household <- data.frame(Datetime = strptime(data_household$Datetime, format = '%Y-%m-%d:%H:%M:%S'), Global_active_power = data_household$Global_active_power, Global_reactive_power = data_household$Global_reactive_power, Voltage = data_household$Voltage, Global_intensity = data_household$Global_intensity, Sub_metering_1 = data_household$Sub_metering_1, Sub_metering_2 = data_household$Sub_metering_2, Sub_metering_3 = data_household$Sub_metering_3)
+png(file = "plot2.png")
+plot(data_household$Datetime, data_household$Global_active_power, pch = '.:', ylab = "Global Active Power (kilowatts)", xlab = "datetime")
+lines(data_household$Datetime, data_household$Global_active_power)
+dev.off()
